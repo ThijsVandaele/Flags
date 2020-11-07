@@ -1,0 +1,117 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Flags\CreolePeoples\EnglishCreolePeoples\" />
+    <Folder Include="wwwroot\Flags\CreolePeoples\FrenchCreolePeoples\" />
+    <Folder Include="wwwroot\Flags\CreolePeoples\DutchCreolePeoples\" />
+    <Folder Include="wwwroot\Flags\CreolePeoples\PortugueseCreolePeoples\" />
+    <Folder Include="wwwroot\Flags\CreolePeoples\SpanishCreolePeoples\" />
+    <Folder Include="wwwroot\Flags\HistoricPeoples\Europe\" />
+    <Folder Include="wwwroot\Flags\HistoricPeoples\Americas\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\CushiticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\EthiopianSemiticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\ChadicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\KhoisanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\BantuPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\MalagasyPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\AfricanArabas%28includingSwahiliPeoples%29\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\AfricansOfEuropeanAncestry\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\Niger-CongoPeoples%28non-Bantu%29\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\PygmyPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAfrica\Nilo-SaharanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\AleutPeople\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\InuitPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\NativeCanadianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\NativeAmericanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\NativeMexicanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\NativePeopesOfCentralAmerica\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAmericas%28indigenous%29\NativePeoplesOfSouthAmerica\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\Chukotko-KamchatkanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\MongolicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\KoreanicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\JaponicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\AustroasiaticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\AustronesianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\Hmong-MienPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\Tai-KadaiPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\Tibeto-BurmanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\SiniticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\OkhotskicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfAsia%28North-East-South%29\TungusicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\CelticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\BalticPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\AlbanianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\GermanicPeoples\GermanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\GermanicPeoples\DutchPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\GermanicPeoples\Anglo-FrisianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\GermanicPeoples\Scandinavian%28NorthGermanic%29Peoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\HellenicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\MaltesePeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\ItinerantPeoplesOfEurope\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\RomancePeoples\IberianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\RomancePeoples\FrenchPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\RomancePeoples\ItalianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\RomancePeoples\EasternRomancePeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\RomancePeoples\Rhaeto-RomancePeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\SlavicPeoples\EastSlavicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\SlavicPeoples\SouthSlavicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\SlavicPeoples\WestSlavicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\BalticFinns\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\SamoyedicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\Permians\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\VolgaFinns\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\SamiPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\UralicPeoples\UgricPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfEurope\VasconicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\EuropeAndCaucasus\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\Africa\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\MiddleEast\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\Asia\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\Americas\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfMultiethnic-MulticulturalStatesAndRegions\Oceania\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfOceania%28indigenous%29\IndigenousAustralianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfOceania%28indigenous%29\MelanesianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfOceania%28indigenous%29\MicronesianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfOceania%28indigenous%29\PolynesianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfOceania%28indigenous%29\PapuanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheAmericas%28modern%29\EuropeanAmericans\British-IrishAncestry\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheAmericas%28modern%29\EuropeanAmericans\FrenchAncestry\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheAmericas%28modern%29\AfricanAmericans\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheAmericas%28modern%29\LatinAmericans\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheCaucasus\ArmenianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheCaucasus\KartvelianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheCaucasus\NorthwestCaucasianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheCaucasus\NortheastCaucasianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\Indo-AryanPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\DardicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\BurushoPeople\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\DravidianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\Indo-AryanEthnoreligiousGroups\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheIndianSubcontinent\SiddiPeople\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\ArabPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\EgyptianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\Arab-Berbers\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\Berbers\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\JewishPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\MesopatamianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\IranianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\HazaraPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\MiddleEasternEthnoreligiousGroups\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\SouthArabianPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\TurkicPeoples\KarlukPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\TurkicPeoples\KipchakPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\TurkicPeoples\OghurPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\TurkicPeoples\SiberianTurkicPeoples\" />
+    <Folder Include="wwwroot\Flags\PeoplesOfTheMiddleEast\TurkicPeoples\OghuzPeoples\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>
