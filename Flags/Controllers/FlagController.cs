@@ -3,6 +3,7 @@ using Flags.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using Flags.Extensions;
 
 namespace Flags.Controllers
 {
@@ -23,8 +24,33 @@ namespace Flags.Controllers
 
             var w = _env.WebRootPath;
             model.Flags = _flagService.GetFlags(Path.Combine(w, source), true);
-            
+
             return View(model); 
+        }
+
+        public ActionResult Click(string source)
+        {
+            var model = new ClickModel();
+
+            var w = _env.WebRootPath;
+            var flags = _flagService.GetFlags(Path.Combine(w, source), true);
+            model.FlagsToShow.AddRange(flags);
+            model.FlagsToAnswer.AddRange(flags);
+
+            if (source == "Flags")
+            {
+                model.FlagsToShow.Shuffle();
+                model.FlagsToAnswer.Shuffle();
+            }
+            else
+            {
+                model.FlagsToShow.ShuffleGood();
+                model.FlagsToAnswer.Shuffle();
+            }
+
+            model.Source = source.Replace("//", " -> ");
+
+            return View(model);
         }
     }
 }

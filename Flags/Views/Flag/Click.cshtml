@@ -1,0 +1,383 @@
+﻿@using System.Web;
+@model Flags.Models.ClickModel
+@{
+  ViewData["Title"] = "Click";
+  var counter = 0;
+  Flag flag = null;
+}
+
+<style>
+  .banner {
+    color: black;
+    font-size: x-large;
+    margin-left: 4px;
+  }
+
+  .card:hover {
+    cursor: pointer
+  }
+
+  .banner span {
+    margin-right: 10px;
+  }
+
+  #FlagName {
+    font-weight: bold;
+  }
+
+  #findFlagInfoMouse {
+    font-weight: bold;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+    padding: 5px;
+    background-color: antiquewhite;
+    font-size: 20px;
+    position: absolute;
+    width: auto;
+    z-index: 100;
+  }
+
+  .endResultBox {
+    width: 300px;
+    height: 200px;
+    z-index: 100;
+    position: absolute;
+    background-color: antiquewhite;
+    border-color: black;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: solid;
+    margin: auto;
+    padding: 10px;
+    top: 30%;
+    left: 30%;
+    text-align: center;
+  }
+
+  #endAccuracy {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  #endTime {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .modal-content {
+    align-content: center;
+    background-color: antiquewhite;
+    border-color: black;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: solid;
+  }
+</style>
+
+<script type="text/javascript">
+
+  var flags = [];
+  var minuut = 0;
+  var second = 0;
+  var currentFlagIndex = -1;
+  var tries = 0;
+  var currentTries = 0;
+  var mistakenTries = 0;
+
+  $(document).on('mousemove', function (e) {
+    $("#findFlagInfoMouse").css({
+      left: e.pageX + 20,
+      top: e.pageY
+    })
+  })
+
+  $(document).ready(function () {
+    getNewFlag();
+
+    $("#accuracy").html("0 %");
+    $("#time").html("00:00");
+
+    $(".card").on("click", function () {
+      if ($(this).data("guessed")) {
+        return;
+      }
+
+      var currentFlagName = flags[currentFlagIndex].Name;
+
+      var flagName = $(this).data("flag-name");
+      var correctFlag = $(".flagCard[data-flag-name='" + currentFlagName + "']");
+      var cardBody = $(this).find(".card-body");
+      tries++;
+      currentTries++;
+
+      if (currentFlagName == flagName) {
+        currentTries = 0;
+        hint(false, correctFlag);
+        $(this).data("guessed", true);
+        cardBody.css("visibility", "visible");
+        cardBody.css("opacity", "1")
+
+        $("#findFlagInfoMouse").css("color", "")
+        $("#FlagName").css("color", "")
+
+        getNewFlag();
+      }
+      else {
+        mistakenTries++;
+        $("#findFlagInfoMouse").css("color", "orange")
+        $("#FlagName").css("color", "orange")
+        cardBody.css("visibility", "visible")
+        cardBody.css("opacity", "1")
+        cardBody.fadeTo(2000, 0, function () {
+          cardBody.css("visibility", "hidden")
+        });
+
+        if (currentTries == 3) {
+          $("#findFlagInfoMouse").css("color", "red")
+          $("#FlagName").css("color", "red")
+
+          hint(true, correctFlag);
+        }
+      }
+
+      var a = (mistakenTries / tries) * 100;
+      var accuracy = (100 - a).toFixed(0);
+
+      $("#accuracy").html(accuracy + " %")
+    })
+  });
+
+  function getNewFlag() {
+    if (currentFlagIndex == flags.length - 1) {
+      gameEnd();
+    }
+    else {
+      currentFlagIndex++;
+
+      var currentFlag = flags[currentFlagIndex];
+      $("#FlagName").html(currentFlag.NameWithSpaces);
+      $("#findFlagInfoMouse").html(currentFlag.NameWithSpaces);
+    }
+  }
+
+  function gameEnd() {
+    $("#endResultModal").modal()
+    $("#endAccuracy").html($("#accuracy").html())
+    $("#endTime").html($("#time").html())
+    $("#findFlagInfoMouse").hide();
+    clearInterval(timer);
+  }
+
+  function hint(show, correctFlag) {
+    if (show) {
+      correctFlag.css("border-color", "red")
+        .css("border-width", "5px")
+        .css("padding", "5px")
+        .css("border-style", "dashed")
+    }
+    else {
+      correctFlag.css("border-color", "")
+        .css("border-width", "")
+        .css("padding", "")
+        .css("border-style", "")
+    }
+  }
+
+  @foreach(var f in Model.FlagsToAnswer)
+  {
+      <text>
+        var name = '@Html.Raw(HttpUtility.JavaScriptStringEncode(f.Name))';
+        var nameSpaces = '@Html.Raw(HttpUtility.JavaScriptStringEncode(f.NameWithSpaces))';
+        var flag = { Name: name, NameWithSpaces: nameSpaces };
+        flags.push(flag);
+      </text>
+  }
+
+  var timer = setInterval(function () {
+
+    if (second == 59) {
+      minuut += 1;
+      second = 0;
+    }
+
+    second += 1;
+
+    var m;
+    var s;
+
+    if (minuut <= 9) {
+      m = "0" + minuut;
+    }
+    else {
+      m = minuut;
+    }
+
+    if (second <= 9) {
+      s = "0" + second;
+    }
+    else {
+      s = second;
+    }
+
+    $("#time").html(m + ":" + s)
+  },
+    1000)
+
+  function onOkEndResultBoxClick() {
+    $("#endResultBox").fadeOut();
+  }
+
+  function onPlayAgain(){
+    location.reload();
+  }
+</script>
+
+<h1>Click (@Model.FlagsToShow.Count)</h1>
+<h3>@Model.BreadCrume</h3>
+
+<div class="banner">
+  <span id="time"></span>
+  <span id="accuracy"></span>
+  <span id="FlagName"></span>
+</div>
+
+<div id="findFlagInfoMouse">
+
+</div>
+<p>
+  @foreach (var f in Model.FlagsToShow.OrderBy(x => x.NameWithSpaces))
+  {
+    @:@f.NameWithSpaces,
+  }
+</p>
+
+@while (counter < Model.FlagsToShow.Count)
+{
+  flag = Model.FlagsToShow[counter++];
+
+  <div class="card-deck">
+
+    <div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+      <div class="card-body" style="visibility: hidden;">
+        <h5 class="card-title">@flag.NameWithSpaces</h5>
+      </div>
+    </div>
+
+
+    @{
+      if (counter >= Model.FlagsToShow.Count)
+      {
+      @:</div><br />
+      continue;
+    }
+
+    flag = Model.FlagsToShow[counter++];
+    }
+
+<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+  <div class="card-body" style="visibility: hidden;">
+    <h5 class="card-title">@flag.NameWithSpaces</h5>
+  </div>
+</div>
+
+    @{
+      if (counter >= Model.FlagsToShow.Count)
+      {
+        @:</div><br />
+        continue;
+      }
+
+      flag = Model.FlagsToShow[counter++];
+    }
+
+<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+  <div class="card-body" style="visibility: hidden;">
+    <h5 class="card-title">@flag.NameWithSpaces</h5>
+  </div>
+</div>
+
+    @{
+      if (counter >= Model.FlagsToShow.Count)
+      {
+        @:</div><br />
+        continue;
+      }
+
+      flag = Model.FlagsToShow[counter++];
+    }
+
+<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+  <div class="card-body" style="visibility: hidden;">
+    <h5 class="card-title">@flag.NameWithSpaces</h5>
+  </div>
+</div>
+
+    @{
+      if (counter >= Model.FlagsToShow.Count)
+      {
+        @:</div><br />
+        continue;
+      }
+
+      flag = Model.FlagsToShow[counter++];
+    }
+
+<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+  <div class="card-body" style="visibility: hidden;">
+    <h5 class="card-title">@flag.NameWithSpaces</h5>
+  </div>
+</div>
+
+    @{
+      if (counter >= Model.FlagsToShow.Count)
+      {
+        @:</div><br />
+        continue;
+      }
+
+      flag = Model.FlagsToShow[counter++];
+    }
+
+<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+  <div class="card-body" style="visibility: hidden;">
+    <h5 class="card-title">@flag.NameWithSpaces</h5>
+  </div>
+</div>
+
+
+    </div>
+    <br />
+  }
+
+<!-- Modal -->
+<div class="modal fade" id="endResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Finished</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="align-content: center;">
+        <div id="endAccuracy"></div>
+        <div id="endTime"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="onPlayAgain()">Opnieuw</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endResultModal" style="display: none;">
+  Launch demo modal
+</button>
