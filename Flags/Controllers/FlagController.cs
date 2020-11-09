@@ -52,5 +52,30 @@ namespace Flags.Controllers
 
             return View(model);
         }
+
+        public ActionResult Type(string source)
+        {
+            var model = new TypeModel();
+
+            var w = _env.WebRootPath;
+            var flags = _flagService.GetFlags(Path.Combine(w, source), true);
+            model.FlagsToShow.AddRange(flags);
+            model.FlagsToAnswer.AddRange(flags);
+
+            if (source == "Flags")
+            {
+                model.FlagsToShow.Shuffle();
+                model.FlagsToAnswer.Shuffle();
+            }
+            else
+            {
+                model.FlagsToShow.ShuffleGood();
+                model.FlagsToAnswer.Shuffle();
+            }
+
+            model.Source = source.Replace("//", " -> ");
+
+            return View(model);
+        }
     }
 }

@@ -28,7 +28,7 @@
 <ul>
   @foreach(var l in Model.Locations)
   {
-    <li>
+    <li data-name="@(l.Name)">
       @(await Html.PartialAsync("_Location", l))
     </li>
   }

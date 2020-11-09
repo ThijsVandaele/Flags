@@ -25,14 +25,15 @@ namespace Flags.Controllers
             _env = env;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string scrollToName)
         {
             var w = _env.WebRootPath;
             var l = _flagService.GetLocations(Path.Combine(w, "Flags"));
 
             var model = new MainMenuLocationsModel
             {
-                Locations = l
+                Locations = l,
+                ScrollToName = scrollToName
             };
 
             return View(model);

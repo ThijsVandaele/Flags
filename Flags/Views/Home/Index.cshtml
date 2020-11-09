@@ -3,6 +3,16 @@
   ViewData["Title"] = "Home Page";
 }
 
+<script>
+  $(function () {
+    if ("@Model.ScrollToName") {
+      $("html, body").animate({
+        scrollTop: $("li[data-name='ItinerantPeoplesOfEurope']").offset().top
+      }, 1000)
+    }
+  })
+</script>
+
 <div class="text-center">
   <h1 class="display-4">Welcome</h1>
   <h2>Thijs Vandaele Presents</h2>

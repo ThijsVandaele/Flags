@@ -6,76 +6,7 @@
   Flag flag = null;
 }
 
-<style>
-  .banner {
-    color: black;
-    font-size: x-large;
-    margin-left: 4px;
-  }
-
-  .card:hover {
-    cursor: pointer
-  }
-
-  .banner span {
-    margin-right: 10px;
-  }
-
-  #FlagName {
-    font-weight: bold;
-  }
-
-  #findFlagInfoMouse {
-    font-weight: bold;
-    border-color: black;
-    border-width: thin;
-    border-style: solid;
-    padding: 5px;
-    background-color: antiquewhite;
-    font-size: 20px;
-    position: absolute;
-    width: auto;
-    z-index: 100;
-  }
-
-  .endResultBox {
-    width: 300px;
-    height: 200px;
-    z-index: 100;
-    position: absolute;
-    background-color: antiquewhite;
-    border-color: black;
-    border-width: medium;
-    border-radius: 5px;
-    border-style: solid;
-    margin: auto;
-    padding: 10px;
-    top: 30%;
-    left: 30%;
-    text-align: center;
-  }
-
-  #endAccuracy {
-    font-weight: bold;
-    font-size: 35px;
-  }
-
-  #endTime {
-    font-weight: bold;
-    font-size: 25px;
-  }
-
-  .modal-content {
-    align-content: center;
-    background-color: antiquewhite;
-    border-color: black;
-    border-width: medium;
-    border-radius: 5px;
-    border-style: solid;
-  }
-</style>
-
-<script type="text/javascript">
+  <script type="text/javascript">
 
   var flags = [];
   var minuut = 0;
@@ -133,7 +64,7 @@
           cardBody.css("visibility", "hidden")
         });
 
-        if (currentTries == 3) {
+        if (currentTries >= 3) {
           $("#findFlagInfoMouse").css("color", "red")
           $("#FlagName").css("color", "red")
 
@@ -231,7 +162,11 @@
   function onPlayAgain(){
     location.reload();
   }
-</script>
+
+  function goToList() {
+    window.location = "@Url.Action("Index", "Home")?scrollToName=@Model.Name"
+  }
+  </script>
 
 <h1>Click (@Model.FlagsToShow.Count)</h1>
 <h3>@Model.BreadCrume</h3>
@@ -252,109 +187,12 @@
   }
 </p>
 
-@while (counter < Model.FlagsToShow.Count)
+@(await Html.PartialAsync("_FlagList", new FlagListVM
 {
-  flag = Model.FlagsToShow[counter++];
-
-  <div class="card-deck">
-
-    <div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body" style="visibility: hidden;">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-
-    @{
-      if (counter >= Model.FlagsToShow.Count)
-      {
-      @:</div><br />
-      continue;
-    }
-
-    flag = Model.FlagsToShow[counter++];
-    }
-
-<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-  <div class="card-body" style="visibility: hidden;">
-    <h5 class="card-title">@flag.NameWithSpaces</h5>
-  </div>
-</div>
-
-    @{
-      if (counter >= Model.FlagsToShow.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.FlagsToShow[counter++];
-    }
-
-<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-  <div class="card-body" style="visibility: hidden;">
-    <h5 class="card-title">@flag.NameWithSpaces</h5>
-  </div>
-</div>
-
-    @{
-      if (counter >= Model.FlagsToShow.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.FlagsToShow[counter++];
-    }
-
-<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-  <div class="card-body" style="visibility: hidden;">
-    <h5 class="card-title">@flag.NameWithSpaces</h5>
-  </div>
-</div>
-
-    @{
-      if (counter >= Model.FlagsToShow.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.FlagsToShow[counter++];
-    }
-
-<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-  <div class="card-body" style="visibility: hidden;">
-    <h5 class="card-title">@flag.NameWithSpaces</h5>
-  </div>
-</div>
-
-    @{
-      if (counter >= Model.FlagsToShow.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.FlagsToShow[counter++];
-    }
-
-<div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
-  <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-  <div class="card-body" style="visibility: hidden;">
-    <h5 class="card-title">@flag.NameWithSpaces</h5>
-  </div>
-</div>
-
-
-    </div>
-    <br />
-  }
+  ShowNames = false,
+  Flags = Model.FlagsToShow,
+  Cols = 7
+}))
 
 <!-- Modal -->
 <div class="modal fade" id="endResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -371,6 +209,7 @@
         <div id="endTime"></div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="goToList()">Ga naar lijst</button>
         <button type="button" class="btn btn-secondary" onclick="onPlayAgain()">Opnieuw</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
       </div>
@@ -379,5 +218,4 @@
 </div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endResultModal" style="display: none;">
-  Launch demo modal
 </button>

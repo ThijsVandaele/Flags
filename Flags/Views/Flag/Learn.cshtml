@@ -6,88 +6,9 @@
 }
 <h1>Learn (@Model.Flags.Count)</h1>
 
-@while (counter < Model.Flags.Count)
+@(await Html.PartialAsync("_FlagList", new FlagListVM
 {
-  flag = Model.Flags[counter++];
-
-  <div class="card-deck">
-
-    <div class="card">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-    @{
-      if (counter >= Model.Flags.Count)
-      {
-      @:</div><br />
-      continue;
-    }
-
-    flag = Model.Flags[counter++];
-    }
-
-    <div class="card">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-    @{
-      if (counter >= Model.Flags.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.Flags[counter++];
-    }
-
-    <div class="card">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-    @{
-      if (counter >= Model.Flags.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.Flags[counter++];
-    }
-
-    <div class="card">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-    @{
-      if (counter >= Model.Flags.Count)
-      {
-        @:</div><br />
-        continue;
-      }
-
-      flag = Model.Flags[counter++];
-    }
-
-    <div class="card">
-      <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">@flag.NameWithSpaces</h5>
-      </div>
-    </div>
-
-
-    </div>
-    <br />
-  }
+  ShowNames = true,
+  Flags = Model.Flags,
+  Cols = 5
+}))

@@ -78,3 +78,76 @@ svg{
 a {
     text-decoration: none;
 }
+
+.banner {
+    color: black;
+    font-size: x-large;
+    margin-left: 4px;
+}
+
+.card:hover {
+    cursor: pointer
+}
+
+.banner span {
+    margin-right: 10px;
+}
+
+#FlagName {
+    font-weight: bold;
+}
+
+#findFlagInfoMouse {
+    font-weight: bold;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+    padding: 5px;
+    background-color: antiquewhite;
+    font-size: 20px;
+    position: absolute;
+    width: auto;
+    z-index: 100;
+}
+
+.endResultBox {
+    width: 300px;
+    height: 200px;
+    z-index: 100;
+    position: absolute;
+    background-color: antiquewhite;
+    border-color: black;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: solid;
+    margin: auto;
+    padding: 10px;
+    top: 30%;
+    left: 30%;
+    text-align: center;
+}
+
+#endAccuracy {
+    font-weight: bold;
+    font-size: 35px;
+}
+
+#endTime {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.modal-content {
+    align-content: center;
+    background-color: antiquewhite;
+    border-color: black;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+.flagCardImg {
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+}

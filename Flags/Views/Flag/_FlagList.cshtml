@@ -1,0 +1,38 @@
+﻿@model FlagListVM
+
+@{
+  var rows = Math.Ceiling((decimal)Model.Flags.Count / Model.Cols);
+}
+
+@for (int row = 0; row < rows; row++)
+{
+  <div class="card-deck">
+    @for (int col = 0; col < Model.Cols; col++)
+    {
+      var index = (row * Model.Cols) + col;
+
+      if (index < Model.Flags.Count)
+      {
+        var flag = Model.Flags[index];
+
+        <div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false">
+          <img class="card-img-top flagCardImg" src="~/@flag.RelativePath" alt="Card image cap">
+          <div class="card-body" style="visibility: @(Model.ShowNames ? "visible" : "hidden");">
+            <text class="card-title">@flag.NameWithSpaces</text>
+          </div>
+        </div>
+      }
+      else if (Model.Flags.Count > 0)
+      {
+        var flag = Model.Flags[0];
+        <div class="card flagCard" data-flag-name="@flag.Name" data-guessed="false" style="visibility: hidden">
+          <img class="card-img-top" src="~/@flag.RelativePath" alt="Card image cap">
+          <div class="card-body">
+            <text class="card-title">@flag.NameWithSpaces</text>
+          </div>
+        </div>
+      }
+    }
+  </div><br />
+}
+

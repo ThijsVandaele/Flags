@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Flags.Models
 {
-    public class ClickModel
+    public class TypeModel
     {
         public string Source { get; set; }
         public string BreadCrume
@@ -13,7 +14,7 @@ namespace Flags.Models
                 var parts = Source.Split("\\");
                 var braedCrume = string.Empty;
 
-                foreach(var p in parts)
+                foreach (var p in parts)
                 {
                     braedCrume += $"{string.Concat(p.Select(x => char.IsUpper(x) || x == '(' || x == ')' ? " " + x : x.ToString())).TrimStart(' ')} -> ";
                 }
