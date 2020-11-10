@@ -6,6 +6,11 @@
   Flag flag = null;
 }
 
+<style>
+
+</style>
+
+
   <script type="text/javascript">
 
   var flags = [];
@@ -51,7 +56,7 @@
 
         $("#findFlagInfoMouse").css("color", "")
         $("#FlagName").css("color", "")
-
+        $("#Score").html((currentFlagIndex + 1) + "/" + flags.length);
         getNewFlag();
       }
       else {

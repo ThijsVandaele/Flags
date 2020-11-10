@@ -1,7 +1,224 @@
-﻿
+﻿@using System.Web;
+@model Flags.Models.TypeModel
 @{
-    ViewData["Title"] = "Type";
+  ViewData["Title"] = "Type";
+  var counter = 0;
+  Flag flag = null;
 }
 
-<h1>Type</h1>
+<style>
+  #flagToFind{
+    border: thin solid black;
+  }
+</style>
 
+  <script type="text/javascript">
+
+  var flags = [];
+  var minuut = 0;
+  var second = 0;
+  var currentFlagIndex = -1;
+  var tries = 0;
+  var currentTries = 0;
+  var mistakenTries = 0;
+
+    $(document).ready(function () {
+      getNewFlag();
+
+      $("#accuracy").html("0 %");
+      $("#time").html("00:00");
+      $("#Score").html("0/" + flags.length);
+
+      $("#flagAnswer").focus();
+
+      $("#flagAnswer").on("keypress", function (e) {
+        if (e.which === 13) {
+          answer();
+        }
+      })
+    })
+
+    function shake(elementId) {
+      var div = document.getElementById(elementId);
+      var interval = 100;
+      var distance = 10;
+      var times = 4;
+
+      $(div).css('position', 'relative');
+
+      for (var iter = 0; iter < (times + 1); iter++) {
+        $(div).animate({
+          left: ((iter % 2 == 0 ? distance : distance * -1))
+        }, interval);
+      }
+      $(div).animate({ left: 0 }, interval);
+    }
+    var l;
+    function answer() {
+        var currentFlagName = flags[currentFlagIndex].Name;
+        var cardBody = $(this).find(".card-body");
+        var answer = $("#flagAnswer").val();
+
+        tries++;
+      currentTries++;
+
+      var cf = currentFlagName.toUpperCase().replace(" ", "");
+      var a = answer.toUpperCase().replace(" ", "");
+
+      if (cf == a) {
+          currentTries = 0;
+          $(this).data("guessed", true);
+          cardBody.css("visibility", "visible");
+          var correctFlag = $(".flagCard[data-flag-name='" + currentFlagName + "']")
+          correctFlag.find(".card-body").css("visibility", "visible")
+          correctFlag.data("guessed", true);
+          $("#Score").html((currentFlagIndex + 1) + "/" + flags.length);
+          getNewFlag();
+        }
+        else {
+          mistakenTries++;
+          shake("flagAnswer");
+        }
+
+        var a = (mistakenTries / tries) * 100;
+        var accuracy = (100 - a).toFixed(0);
+
+        $("#accuracy").html(accuracy + " %");
+      }
+
+  function getNewFlag() {
+    if (currentFlagIndex == flags.length - 1) {
+      gameEnd();
+    }
+    else {
+      currentFlagIndex++;
+
+      var currentFlag = flags[currentFlagIndex];
+      $("#flagToFind").prop("src", "/" + currentFlag.RelativePath);
+      $("#flagToFind").data("flag-name", currentFlag.Name);
+      $("#hintAnswer").html("");
+      $("#flagAnswer").val("");
+    }
+  }
+
+  function gameEnd() {
+    $("#endResultModal").modal()
+    $("#endAccuracy").html($("#accuracy").html())
+    $("#endTime").html($("#time").html())
+    clearInterval(timer);
+  }
+
+  function showHint() {
+
+  }
+
+  @foreach(var f in Model.FlagsToAnswer)
+  {
+      <text>
+        var name = '@Html.Raw(HttpUtility.JavaScriptStringEncode(f.Name))';
+        var nameSpaces = '@Html.Raw(HttpUtility.JavaScriptStringEncode(f.NameWithSpaces))';
+          var relativePath = '@Html.Raw(HttpUtility.JavaScriptStringEncode(f.RelativePath))'
+          var flag = { Name: name, NameWithSpaces: nameSpaces, RelativePath: relativePath };
+        flags.push(flag);
+      </text>
+  }
+
+  var timer = setInterval(function () {
+
+    if (second == 59) {
+      minuut += 1;
+      second = 0;
+    }
+
+    second += 1;
+
+    var m;
+    var s;
+
+    if (minuut <= 9) {
+      m = "0" + minuut;
+    }
+    else {
+      m = minuut;
+    }
+
+    if (second <= 9) {
+      s = "0" + second;
+    }
+    else {
+      s = second;
+    }
+
+    $("#time").html(m + ":" + s)
+  },
+    1000)
+
+  function onOkEndResultBoxClick() {
+    $("#endResultBox").fadeOut();
+  }
+
+  function onPlayAgain(){
+    location.reload();
+  }
+
+  function goToList() {
+    window.location = "@Url.Action("Index", "Home")?scrollToName=@Model.Name"
+  }
+  </script>
+
+<h1>Click (@Model.FlagsToShow.Count)</h1>
+<h3>@Model.BreadCrume</h3>
+
+<div class="banner">
+  <span id="time"></span>
+  <span id="accuracy"></span>
+  <span id="FlagName"></span>
+  <span id="Score"></span>
+</div>
+
+<p>
+  @foreach (var f in Model.FlagsToShow.OrderBy(x => x.NameWithSpaces))
+  {
+    @:@f.NameWithSpaces,
+  }
+</p>
+
+<div>
+  <img id="flagToFind" data-flag-name="" src="" />
+  <input id="flagAnswer" type="text" />
+  <button onclick="answer()">Antwoord</button>
+  @*<button onclick="showHint()">Hint</button>*@
+  <p id="hintAnswer"></p>
+</div>
+
+@(await Html.PartialAsync("_FlagList", new FlagListVM
+{
+  ShowNames = false,
+  Flags = Model.FlagsToShow,
+  Cols = 7
+}))
+<!-- Modal -->
+<div class="modal fade" id="endResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Finished</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="align-content: center;">
+        <div id="endAccuracy"></div>
+        <div id="endTime"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="goToList()">Ga naar lijst</button>
+        <button type="button" class="btn btn-secondary" onclick="onPlayAgain()">Opnieuw</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endResultModal" style="display: none;">
+</button>

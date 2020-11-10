@@ -85,10 +85,6 @@ a {
     margin-left: 4px;
 }
 
-.card:hover {
-    cursor: pointer
-}
-
 .banner span {
     margin-right: 10px;
 }
@@ -150,4 +146,8 @@ a {
     border-color: black;
     border-width: thin;
     border-style: solid;
+}
+
+#Score{
+    margin-left: 30px;
 }

@@ -4,6 +4,13 @@
   var counter = 0;
   Flag flag = null;
 }
+
+<style>
+  .card:hover {
+    cursor: pointer
+  }
+</style>
+
 <h1>Learn (@Model.Flags.Count)</h1>
 
 @(await Html.PartialAsync("_FlagList", new FlagListVM
