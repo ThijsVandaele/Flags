@@ -64,8 +64,8 @@
 
       var cf = currentFlagName.toUpperCase().replace(" ", "");
       var a = answer.toUpperCase().replace(" ", "");
-
-      if (cf == a) {
+      console.log(cf + " " + a);
+      if (cf == a.replace(" ", "")) {
           currentTries = 0;
           $(this).data("guessed", true);
           cardBody.css("visibility", "visible");
