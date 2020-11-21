@@ -110,6 +110,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\Sketches\Music\TrebleScaleSketch.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
