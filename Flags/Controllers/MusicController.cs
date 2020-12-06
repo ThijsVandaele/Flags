@@ -18,5 +18,10 @@ namespace Flags.Controllers
         {
             return View();
         }
+
+        public ActionResult ViolinNotes()
+        {
+            return View();
+        }
     }
 }
